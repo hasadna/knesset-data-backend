@@ -1,8 +1,5 @@
 This project is a backend for [knesset-data-web-ui](https://github.com/WEBbeast2018/knesset-data-web-ui/)
 
-## 3rd Party Resources
-[Font Awesome for react](https://fontawesome.com/icons?d=gallery&s=regular)
-
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Routes](#routes)
