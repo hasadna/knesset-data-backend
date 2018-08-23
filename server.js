@@ -21,6 +21,6 @@ app.use((err, req, res, next) => {
 	}
 });
 
-app.listen(3000,
-	() => console.log('data server listening on port 3000. try: http://localhost:3000/api/members/')
+app.listen(4000,
+	() => console.log('data server listening on port 3000. try: http://localhost:4000/api/members/')
 );
