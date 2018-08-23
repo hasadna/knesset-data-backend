@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', require('./api/members/members.route'));
-// app.use('/api', require('./api/committees/committees.route'));
+app.use('/api', require('./api/committees/committees.route'));
 
 // error handling
 app.use((err, req, res, next) => {

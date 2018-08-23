@@ -17,7 +17,7 @@ npm install
 Then `npm start` for standard/production  mode OR `npm run dev` for development
 
 ### Routes
-on topic route, data service will be called to fetch the appropriate json for the route
+On topic route, data service will be called to fetch the appropriate json for the route
 
 * for route `/members` => fetch https://oknesset.org/members/index.json
 * for route `/members/35` => fetch https://oknesset.org/members/35.json
@@ -26,4 +26,4 @@ on topic route, data service will be called to fetch the appropriate json for th
 
 ### Data Cache
 
-routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`
+Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`
