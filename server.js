@@ -13,12 +13,10 @@ app.use((req, res, next) => {
 
 app.use('/api', require('./api/members/members.route'));
 app.use('/api', require('./api/committees/committees.route'));
-app.get('/api/news', (req, res) => {
-	res.json({latestItems: 'latestItems'});	// TODO: implement route for latest items
-});
+app.use('/api', require('./api/news/news.route')); // TODO: implement route for latest items
 
 // error handling
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
 	if (err) {
 		res.send('ERROR');
 	}

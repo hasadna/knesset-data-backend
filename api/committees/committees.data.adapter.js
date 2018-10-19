@@ -11,7 +11,7 @@ module.exports = {
 	},
 	getByMeeting: (meetingId, callback) => {
 		const meetingRoute = meetingId.replace(/-/g, '/');
-		console.log(`/meetings/${meetingRoute}.json`);
+		console.log(`meetings/${meetingRoute}.json`);
 
 		getData(`meetings/${meetingRoute}.json`)
 			.then(data => callback(data));

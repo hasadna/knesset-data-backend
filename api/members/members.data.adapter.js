@@ -6,7 +6,7 @@ module.exports = {
 			.then(data => callback(data));
 	},
 	getById: (id, callback) => {
-		getData(`/members/${id}.json`)
+		getData(`members/${id}.json`)
 			.then(data => callback(data));
 	}
 };
