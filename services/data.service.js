@@ -1,4 +1,7 @@
+
 const pg = require('pg');
+const debug = require('debug')('data.service');
+
 // create a config to configure pooling behavior and client options
 const config = {
 	user: 'redash_reader',
@@ -43,19 +46,16 @@ module.exports.getData = async (query, route) => {
 	const cachedData = cache.get(route);	// get from cache if available
 
 	if(cachedData) {
-		// TODO: replace with debug
-		console.log(`fetch data from Cache`);
+		debug(`fetch data from Cache`);
 		return new Promise((resolve) => resolve(cachedData));	// returned cached data
 	} else {
-		// TODO: replace with debug
-		console.log(`fetch data from Database`);
+		debug(`fetch data from Database`);
 		try {
 			const { rows } = await exeQuery(query);
 			cache.set(route, rows);
 			return rows;
 		} catch (err) {
-			// TODO: replace with debug
-			console.log('Database ' + err)
+			debug('Database ' + err)
 		}
 	}
 };

@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
+const debug = require('debug')('backend');
 
 // log middleware
 app.use((req, res, next) => {
-	// TODO: replace with debug
-	console.log(`request url: ${req.url}`);
+	debug(`request url: ${req.url}`);
 	next();
 });
 
