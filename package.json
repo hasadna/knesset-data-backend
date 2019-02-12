@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "DEBUG=* nodemon server.js --inspect",
+    "dev": "DEBUG=* npx nodemon server.js --inspect",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuvalbl",
@@ -15,5 +15,8 @@
     "express": "^4.16.4",
     "nano-cache": "^1.1.2",
     "pg": "^7.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
