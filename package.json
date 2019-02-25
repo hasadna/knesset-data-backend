@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "DEBUG=* npx nodemon server.js --inspect",
+    "dev": "DEBUG=* npx nodemon --inspect server.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuvalbl",

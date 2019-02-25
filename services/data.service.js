@@ -40,19 +40,19 @@ const cache = new NanoCache({
 	bytes : 100 * NanoCache.SIZE.MB, // max memory use for data
 });
 
-module.exports.getData = async (query, route) => {
+module.exports.getData = async (query, path) => {
 	cache.clearExpired();	// deletes all expired key with their values to free up memory
 
-	const cachedData = cache.get(route);	// get from cache if available
+	const cachedData = cache.get(path);	// get from cache if available
 
 	if(cachedData) {
-		debug(`fetch data from Cache`);
+		debug(`fetch data from Cache [TOKEN:${path}]`);
 		return new Promise((resolve) => resolve(cachedData));	// returned cached data
 	} else {
 		debug(`fetch data from Database`);
 		try {
 			const { rows } = await exeQuery(query);
-			cache.set(route, rows);
+			cache.set(path, rows);
 			return rows;
 		} catch (err) {
 			debug('Database ' + err)
