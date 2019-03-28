@@ -21,7 +21,7 @@ Then `npm start` for standard/production  mode OR `npm run dev` for development
 ### Routes
 On topic route, data service will be called to fetch the appropriate date. see file: `committees.route.js`
 
-* `/committees` - statistics of all committees per knesset
+* `/committees-by-knesset` - statistics of all committees per knesset
   - collection:{knesset-id, knesset-name, #committees-per-knesset, #meetings-per-knesset}
 
 * `/committees-by-knesset/:knessetId'` - committees data for specific knesset (id, name, meetings num)
