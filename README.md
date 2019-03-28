@@ -21,19 +21,19 @@ Then `npm start` for standard/production  mode OR `npm run dev` for development
 ### Routes
 On topic route, data service will be called to fetch the appropriate date. see file: `committees.route.js`
 
-*`/committees` - statistics of all committees per knesset
+* `/committees` - statistics of all committees per knesset
   - collection:{knesset-id, knesset-name, #committees-per-knesset, #meetings-per-knesset}
 
-*`/committees-by-knesset/:knessetId'` - committees data for specific knesset (id, name, meetings num)
+* `/committees-by-knesset/:knessetId'` - committees data for specific knesset (id, name, meetings num)
   - single:{knesset-id, knesset-name}
   - collection:{committee-id,  committee-name, #meetings-per-knesset}
 
-*`/committees-by-knesset/:knessetId/:committeeId'` - all meetings of a specific committee (for specific knesset)
+* `/committees-by-knesset/:knessetId/:committeeId'` - all meetings of a specific committee (for specific knesset)
   - single:{knesset-id, knesset-name, committee-id,  committee-name, mks-id-collection}
   - collection:{meeting-id, meeting-name, meeting-date, has-protocol}
 
 
-*`/committees-by-knesset/:knessetId/:committeeId:meetingId'` - specific meeting data (protocol)
+* `/committees-by-knesset/:knessetId/:committeeId:meetingId'` - specific meeting data (protocol)
   - single:{knesset-id, knesset-name, committee-id,  committee-name, meeting-id, meeting-name, meeting-date, mks-id-collection, general-protocol-data}
   - collection:{speaker, mk-id(-1 if not mk), content }
 
