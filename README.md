@@ -19,12 +19,23 @@ npm install
 Then `npm start` for standard/production  mode OR `npm run dev` for development
 
 ### Routes
-On topic route, data service will be called to fetch the appropriate json for the route
+On topic route, data service will be called to fetch the appropriate date. see file: `committees.route.js`
 
-* for route `/members` => fetch https://oknesset.org/members/index.json
-* for route `/members/35` => fetch https://oknesset.org/members/35.json
-* for route `/committees/952` => fetch https://oknesset.org/committees/952.json
-* for route `/committees/952/2-0-2071137` => fetch https://oknesset.org/meetings/2/0/2071137.json
+*`/committees` - statistics of all committees per knesset
+  - collection:{knesset-id, knesset-name, #committees-per-knesset, #meetings-per-knesset}
+
+*`/committees-by-knesset/:knessetId'` - committees data for specific knesset (id, name, meetings num)
+  - single:{knesset-id, knesset-name}
+  - collection:{committee-id,  committee-name, #meetings-per-knesset}
+
+*`/committees-by-knesset/:knessetId/:committeeId'` - all meetings of a specific committee (for specific knesset)
+  - single:{knesset-id, knesset-name, committee-id,  committee-name, mks-id-collection}
+  - collection:{meeting-id, meeting-name, meeting-date, has-protocol}
+
+
+*`/committees-by-knesset/:knessetId/:committeeId:meetingId'` - specific meeting data (protocol)
+  - single:{knesset-id, knesset-name, committee-id,  committee-name, meeting-id, meeting-name, meeting-date, mks-id-collection, general-protocol-data}
+  - collection:{speaker, mk-id(-1 if not mk), content }
 
 ### Data Cache
 
