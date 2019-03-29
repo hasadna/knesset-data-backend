@@ -12,10 +12,11 @@ install:
 - bash $HOME/bin/travis_ci_operator.sh init
 - travis_ci_operator.sh docker-login
 script:
-- docker build -t uumpa/knesset-data-backend .
+- docker pull uumpa/knesset-data-backend:latest
+- docker build -t uumpa/knesset-data-backend:latest -t uumpa/knesset-data-backend:$TRAVIS_COMMIT --cache-from uumpa/knesset-data-backend:latest .
 deploy:
   provider: script
-  script: docker push uumpa/knesset-data-backend
+  script: bash .travis.sh deploy
   on:
     branch: master
     condition: $TRAVIS_TAG = "" && $TRAVIS_PULL_REQUEST = "false"
