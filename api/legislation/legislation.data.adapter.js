@@ -16,8 +16,16 @@ module.exports = {
   // https://app.redash.io/hasadna/queries/165441/source#284091
   byKnessetNum: (route, callback, knessetNum) => {
     const query = `
-    SELECT "BillID", "KnessetNum", "Name", "PrivateNumber", "StatusID", "PostponementReasonDesc", "LastUpdatedDate"
-    FROM bills_kns_bill
+    SELECT "BillID", "KnessetNum", "Name", "PrivateNumber", "StatusID", "PostponementReasonDesc", "LastUpdatedDate", (
+      select string_agg(i."FirstName"||' '||i."LastName", ', ')
+      from
+          bills_kns_billinitiator bi,
+          members_mk_individual i
+      where
+          bi."PersonID" = i."PersonID"
+          and bi."BillID" = s."BillID"
+  ) bill_initiators
+    FROM bills_kns_bill s
     where "KnessetNum" = ${knessetNum}
     LIMIT 10;
   `;
