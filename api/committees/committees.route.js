@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const collection = require('./committees.data.adapter');
-const debug = require('debug')('committees route');
+const debug = require('../../services/log.service').debugBuilder(module.filename);
 
 const requestCollection = (req, res, fn) => {
   const knessetNum = req.params['knessetNum'];
