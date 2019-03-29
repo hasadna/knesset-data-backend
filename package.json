@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "DEBUG=oknesset,oknesset:* npx nodemon --inspect server.js ",
+    "dev": "DEBUG=oknesset,oknesset:* npx nodemon --inspect server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yuvalbl",
@@ -13,6 +13,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "express": "^4.16.4",
+    "glob": "^7.1.3",
     "nano-cache": "^1.1.2",
     "pg": "^7.8.0"
   },

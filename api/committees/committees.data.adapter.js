@@ -47,20 +47,21 @@ module.exports = {
   // MOCK DATA
   byCommitteeId: (route, callback, knessetNum, committeeId) => {
     const query = `
-		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
-		FROM committees_kns_committeesession
-		LIMIT 1;
-		`;
+		select "CommitteeSessionID", "Number", "TypeDesc", "Location", "SessionUrl", "BroadcastUrl", "StartDate", "topics"
+		from committees_kns_committeesession
+		where "KnessetNum" = ${knessetNum} AND "CommitteeID" = ${committeeId}
+		ORDER BY "StartDate" desc;
+	`;
     getDataAndCallback(query, route, callback)
   },
   // get data for specific committee meeting
   // MOCK DATA
   byMeetingId: (route, callback, knessetNum, committeeId, meetingId) => {
     const query = `
-		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
-		FROM committees_kns_committeesession
-		WHERE "KnessetNum" = ${knessetNum}
-		ORDER BY "StartDate" desc
+		select "CommitteeSessionID", "Number", "TypeDesc", "Location", "SessionUrl", "BroadcastUrl", "StartDate", "topics"
+		from committees_kns_committeesession
+		where "KnessetNum" = ${knessetNum} AND "CommitteeID" = ${committeeId} AND "Number" = ${meetingId}
+		LIMIT 1;
 		`;
     getDataAndCallback(query, route, callback)
   }
