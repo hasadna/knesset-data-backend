@@ -1,13 +1,10 @@
-const getData = require('../../services/data.service').getData;
-const getDataAndCallback = (query, route, callback) => {
-	getData(query, route).then(data => callback(data));
-};
+const getDataAndCallback = require('../../services/data.service').getDataAndCallback;
 
 module.exports = {
-	// get committees summary for all knessets
-	// https://app.redash.io/hasadna/queries/165441/source#284091
-	all: (route, callback) => {
-		const query = `
+  // get committees summary for all knessets
+  // https://app.redash.io/hasadna/queries/165441/source#284091
+  all: (route, callback) => {
+    const query = `
 		select committees.knesset_num, committees.knesset_name, committees.num_committees, sessions.num_sessions from (
 			select k.knesset_num, k.knesset_name, count(1) num_committees
 			from (
@@ -28,43 +25,43 @@ module.exports = {
 		where committees.knesset_num = sessions.knesset_num
 		order by knesset_num desc
 		`;
-		getDataAndCallback(query, route, callback)
-	},
-	// get committees for specific knesset
-	// https://app.redash.io/hasadna/queries/165441/source#284091
-	byKnessetId: (route, callback, knessetId) => {
-		const query = `
+    getDataAndCallback(query, route, callback)
+  },
+  // get committees for specific knesset
+  // https://app.redash.io/hasadna/queries/165441/source#284091
+  byKnessetId: (route, callback, knessetNum) => {
+    const query = `
 		select s.num_sessions, c.*
 		from committees_kns_committee c, (
 			select s."CommitteeID" committee_id, count(1) num_sessions
 			from committees_kns_committeesession s
-			where s."KnessetNum" = ${knessetId}
+			where s."KnessetNum" = ${knessetNum}
 			group by s."CommitteeID"
 		) s
 		where c."CommitteeID" = s.committee_id
 		order by s.num_sessions desc
 		`;
-		getDataAndCallback(query, route, callback)
-	},
-	// get data for specific committee
-	// MOCK DATA
-	byCommitteeId: (route, callback, knessetId, committeeId) => {
-		const query = `
+    getDataAndCallback(query, route, callback)
+  },
+  // get data for specific committee
+  // MOCK DATA
+  byCommitteeId: (route, callback, knessetNum, committeeId) => {
+    const query = `
 		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
 		FROM committees_kns_committeesession
 		LIMIT 1;
 		`;
-		getDataAndCallback(query, route, callback)
-	},
-	// get data for specific committee meeting
-	// MOCK DATA
-	byMeetingId: (route, callback,  knessetId, committeeId, meetingId) => {
-		const query = `
+    getDataAndCallback(query, route, callback)
+  },
+  // get data for specific committee meeting
+  // MOCK DATA
+  byMeetingId: (route, callback, knessetNum, committeeId, meetingId) => {
+    const query = `
 		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
 		FROM committees_kns_committeesession
-		WHERE "KnessetNum" = ${knessetId}
+		WHERE "KnessetNum" = ${knessetNum}
 		ORDER BY "StartDate" desc
 		`;
-		getDataAndCallback(query, route, callback)
-	}
+    getDataAndCallback(query, route, callback)
+  }
 };
