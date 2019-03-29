@@ -16,11 +16,7 @@ router.route(byKnessetStatistics)
     .get((req, res) => requestCollection(req, res, collection.all));
 
 // legislation data for specific knesset
-router.route('/legislation/:knessetNum')
+router.route('/legislation-by-knesset/:knessetNum')
     .get((req, res) => requestCollection(req, res, collection.byKnessetNum));
-
-router.route('/legislation/all')
-    .get((req, res) => requestCollection(req, res, collection.byKnessetNum));
-
 
 module.exports = router;
