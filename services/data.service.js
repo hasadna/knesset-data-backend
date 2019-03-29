@@ -1,16 +1,19 @@
+const fs = require('fs');
 const pg = require('pg');
-const debug = require('debug')('data.service');
+// set logger namespace: debugBase:currentFile
+const debug = require('./log.service').debugBuilder(module.filename);
+const configFile = fs.readFileSync('./secrets/db.config.json');
 
+let config;
 // create a config to configure pooling behavior and client options
-const config = {
-  user: 'redash_reader',
-  database: 'postgres',
-  password: 'Shr4mgutTUGGXLZn7spc',
-  host: 'knesset-data-publicdb.oknesset.org', // Server hosting the postgres database
-  port: 5432,
-  max: 10, // max number of clients in the pool
-  idleTimeoutMillis: 30000 // how long a client is allowed to remain idle before being closed
-};
+if (configFile) {
+  config = JSON.parse(configFile.toString());
+  // successfully read config file
+  config.max = 10; // max number of clients in the pool
+  config.idleTimeoutMillis = 30000; // how long a client is allowed to remain idle before being closed
+} else {
+  throw new Error('Cannot get Database config file');
+}
 
 const pool = new pg.Pool(config);
 

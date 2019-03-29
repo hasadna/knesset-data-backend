@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-const debug = require('debug')('backend');
 const glob = require( 'glob' );
 const path = require( 'path' );
+// set logger namespace: debugBase:currentFile
+const debug = require('./services/log.service').debugBuilder(module.filename);
 
-// log middleware
 app.use((req, res, next) => {
   debug(`request url: ${req.url}`);
   next();
