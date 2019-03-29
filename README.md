@@ -40,3 +40,33 @@ On topic route, data service will be called to fetch the appropriate date. see f
 ### Data Cache
 
 Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`
+
+
+### Running using Docker
+
+Build
+
+```
+docker build -t knesset-data-backend .
+```
+
+Create DB credentials file
+
+```
+{
+  "user": "",
+  "database": "",
+  "password": "",
+  "host": "",
+  "port": 1234
+}
+```
+
+Run (replace DB_CREDENTIALS_FILE with path to the file you created)
+
+```
+docker run -it -v DB_CREDENTIALS_FILE:/home/node/secrets/db.config.json \
+           -p 4000:4000 knesset-data-backend
+```
+
+Backend should be available at http://localhost:4000/api/committees-by-knesset
