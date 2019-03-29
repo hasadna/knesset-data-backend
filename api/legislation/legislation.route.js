@@ -11,13 +11,16 @@ const requestCollection = (req, res, fn) => {
 };
 
 // statistics of all legislation per knesset
-const byKnessetStatistics = '/legislation-by-knesset';
+const byKnessetStatistics = '/legislation';
 router.route(byKnessetStatistics)
     .get((req, res) => requestCollection(req, res, collection.all));
 
 // legislation data for specific knesset
-router.route('/legislation-by-knesset/:knessetNum')
-    .get((req, res) => requestCollection(req, res, collection.byKnessetId));
+router.route('/legislation/:knessetNum')
+    .get((req, res) => requestCollection(req, res, collection.byKnessetNum));
+
+router.route('/legislation/all')
+    .get((req, res) => requestCollection(req, res, collection.byKnessetNum));
 
 
 module.exports = router;
