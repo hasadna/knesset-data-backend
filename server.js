@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const debug = require('debug')('backend');
+const glob = require( 'glob' );
+const path = require( 'path' );
 
 // log middleware
 app.use((req, res, next) => {
@@ -8,9 +10,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', require('./api/members/members.route'));
-app.use('/api', require('./api/committees/committees.route'));
-app.use('/api', require('./api/news/news.route')); // TODO: implement route for latest items
+glob.sync( './api/**/*.route.js' ).forEach( function( file ) {
+  app.use('/api', require( path.resolve( file ) ));
+});
 
 // error handling
 // app.use((err, req, res) => {
