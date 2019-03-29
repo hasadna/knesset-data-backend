@@ -70,3 +70,8 @@ docker run -it -v DB_CREDENTIALS_FILE:/home/node/secrets/db.config.json \
 ```
 
 Backend should be available at http://localhost:4000/api/committees-by-knesset
+
+
+## Continuous Deployment
+
+Merges to master are automatically deployed to: https://api.oknesset.org
