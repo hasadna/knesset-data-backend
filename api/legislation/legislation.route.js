@@ -3,11 +3,12 @@ const collection = require('./legislation.data.adapter');
 const debug = require('debug')('legislation route');
 
 const requestCollection = (req, res, fn) => {
-  const knessetNum = req.params['knessetNum'];
-  // on dev - log
+    const knessetNum = Number(req.params['knessetNum']);
+    const page = Number(req.query['page'] || 1) - 1;
+    // on dev - log
   debug(`:${req.route.path}`);
   // call collection function with route and callback
-  fn(req.route.path, (d) => res.json(d), knessetNum);
+  fn(req.route.path, (d) => res.json(d), knessetNum, page);
 };
 
 // statistics of all legislation per knesset
