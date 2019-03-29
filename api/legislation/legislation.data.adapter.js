@@ -17,7 +17,8 @@ module.exports = {
   // https://app.redash.io/hasadna/queries/165441/source#284091
   byKnessetNum: (route, callback, knessetNum, page = '0') => {
     const query = `
-    SELECT "BillID", "KnessetNum", "Name", "PrivateNumber", "StatusID", "PostponementReasonDesc", "LastUpdatedDate", array(
+    SELECT "BillID", "KnessetNum", "Name", "PrivateNumber", "StatusID", "PostponementReasonDesc", "LastUpdatedDate",
+    array(
       select i."FirstName"||' '||i."LastName"
       from
           bills_kns_billinitiator bi,
@@ -25,7 +26,13 @@ module.exports = {
       where
           bi."PersonID" = i."PersonID"
           and bi."BillID" = s."BillID"
-  ) bill_initiators
+  ) bill_initiators,
+  array(
+    SELECT     "FilePath"
+    FROM       bills_kns_documentbill
+    WHERE      "BillID" = s."BillID"
+    ORDER BY   "GroupTypeID"
+  ) files
     FROM bills_kns_bill s
     where "KnessetNum" = ${knessetNum}
     ORDER BY "BillID" DESC
