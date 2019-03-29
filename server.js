@@ -18,7 +18,7 @@ app.use('/api', require('./api/news/news.route')); // TODO: implement route for 
 // 		res.send('ERROR');
 // 	}
 // });
-const PORT = process.env.PORT || 4000;	//process.env.PORT is used by heroku
+const PORT = process.env.PORT || 4000;	// process.env.PORT is used by heroku
 app.listen(PORT,
     () => debug(`data server listening on port ${PORT}. try: [URL:PORT]/api/committees-by-knesset/`)
 );
