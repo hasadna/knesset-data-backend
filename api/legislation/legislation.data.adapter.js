@@ -23,4 +23,13 @@ module.exports = {
   `;
     getDataAndCallback(query, route, callback)
   },
+  countByKnessetNum: (route, callback) => {
+    const query = `
+    SELECT count(*), "KnessetNum"
+    FROM bills_kns_bill
+    GROUP BY "KnessetNum"
+    ORDER BY "KnessetNum" desc;
+  `;
+    getDataAndCallback(query, route, callback)
+  },
 };

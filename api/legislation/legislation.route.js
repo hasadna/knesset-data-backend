@@ -15,6 +15,9 @@ const byKnessetStatistics = '/legislation';
 router.route(byKnessetStatistics)
     .get((req, res) => requestCollection(req, res, collection.all));
 
+router.route('/legislation-by-knesset')
+    .get((req, res) => requestCollection(req, res, collection.countByKnessetNum));
+
 // legislation data for specific knesset
 router.route('/legislation-by-knesset/:knessetNum')
     .get((req, res) => requestCollection(req, res, collection.byKnessetNum));
