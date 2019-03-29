@@ -33,7 +33,7 @@ On topic route, data service will be called to fetch the appropriate date. see f
   - collection:{meeting-id, meeting-name, meeting-date, has-protocol}
 
 
-* `/committees-by-knesset/:knessetId/:committeeId:meetingId'` - specific meeting data (protocol)
+* `/committees-by-knesset/:knessetId/:committeeId/:meetingId'` - specific meeting data (protocol)
   - single:{knesset-id, knesset-name, committee-id,  committee-name, meeting-id, meeting-name, meeting-date, mks-id-collection, general-protocol-data}
   - collection:{speaker, mk-id(-1 if not mk), content }
 
