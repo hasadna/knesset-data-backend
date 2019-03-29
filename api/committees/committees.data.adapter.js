@@ -1,7 +1,4 @@
-const getData = require('../../services/data.service').getData;
-const getDataAndCallback = (query, route, callback) => {
-	getData(query, route).then(data => callback(data));
-};
+const getDataAndCallback = require('../../services/data.service').getDataAndCallback;
 
 module.exports = {
 	// get committees summary for all knessets
@@ -32,13 +29,13 @@ module.exports = {
 	},
 	// get committees for specific knesset
 	// https://app.redash.io/hasadna/queries/165441/source#284091
-	byKnessetId: (route, callback, knessetId) => {
+	byKnessetId: (route, callback, knessetNum) => {
 		const query = `
 		select s.num_sessions, c.*
 		from committees_kns_committee c, (
 			select s."CommitteeID" committee_id, count(1) num_sessions
 			from committees_kns_committeesession s
-			where s."KnessetNum" = ${knessetId}
+			where s."KnessetNum" = ${knessetNum}
 			group by s."CommitteeID"
 		) s
 		where c."CommitteeID" = s.committee_id
@@ -48,7 +45,7 @@ module.exports = {
 	},
 	// get data for specific committee
 	// MOCK DATA
-	byCommitteeId: (route, callback, knessetId, committeeId) => {
+	byCommitteeId: (route, callback, knessetNum, committeeId) => {
 		const query = `
 		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
 		FROM committees_kns_committeesession
@@ -58,11 +55,11 @@ module.exports = {
 	},
 	// get data for specific committee meeting
 	// MOCK DATA
-	byMeetingId: (route, callback,  knessetId, committeeId, meetingId) => {
+	byMeetingId: (route, callback,  knessetNum, committeeId, meetingId) => {
 		const query = `
 		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
 		FROM committees_kns_committeesession
-		WHERE "KnessetNum" = ${knessetId}
+		WHERE "KnessetNum" = ${knessetNum}
 		ORDER BY "StartDate" desc
 		`;
 		getDataAndCallback(query, route, callback)

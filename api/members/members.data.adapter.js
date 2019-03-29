@@ -1,12 +1,22 @@
-const getData = require('../../services/data.service').getData;
+const getDataAndCallback = require('../../services/data.service').getDataAndCallback;
 
 module.exports = {
-	all: (callback) => {
-		getData('members/index.json')
-			.then(data => callback(data));
+	all: (route, callback)  => {
+		// DEMO QUERY - REMOVE WITH REAL QUERY
+		const query = `
+		SELECT "CommitteeSessionID", "KnessetNum", "TypeDesc", "committee_name"
+		FROM committees_kns_committeesession
+		LIMIT 1;
+		`;
+		getDataAndCallback(query, route, callback)
 	},
-	getById: (id, callback) => {
-		getData(`members/${id}.json`)
-			.then(data => callback(data));
+	getById: (route, callback, memberId)  => {
+		// DEMO QUERY - REMOVE WITH REAL QUERY
+		const query = `
+		SELECT "CommitteeSessionID"
+		FROM committees_kns_committeesession
+		LIMIT 1;
+		`;
+		getDataAndCallback(query, route, callback)
 	}
 };
