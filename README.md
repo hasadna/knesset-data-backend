@@ -37,6 +37,34 @@ On topic route, data service will be called to fetch the appropriate date. see f
   - single:{knesset-id, knesset-name, committee-id,  committee-name, meeting-id, meeting-name, meeting-date, mks-id-collection, general-protocol-data}
   - collection:{speaker, mk-id(-1 if not mk), content }
 
+
+* `/legislation-by-knesset/` - basic data about legislation for every knesset
+  - single: {KnessetNum, #num_bills}
+
+* `/legislation-by-knesset/:knessetNum` - comprehensive data about legislation in a specific knesset
+* `/legislation` - comprehensive data about legislation
+  - single: {BillID, KnessetNum, Name, PrivateNumber, StatusID, PostponementReasonDesc, LastUpdatedDate, SubTypeID, SubTypeDesc}
+  - collection: {files, bill_initiators}
+
+those queries can get more parameters:
+
+  - Name: to search in the bill name/title
+  - SubTypeDesc: (פרטית, ממשלתית או ועדה)
+  - PrivateNumber: for private legislation
+  - page: to get the next 20 results (start from 1)
+  - StatusId: to search by statuses (#TODO: list statuses number and meaning)
+  - BillID: ID in knesset site.
+  - "Start" or "End" can be appended to numeric params.
+
+examples:
+
+    /legislation-by-knesset/20?SubTypeDesc=ממשלתית
+    /legislation?Name=ציבורי&page=2
+    /legislation-by-knesset/19?SubTypeDesc=פרטית&PrivateNumberStart=50&PrivateNumberEnd=60
+
 ### Data Cache
 
-Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`
+Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`.
+To avoid caching or set specific TTL for cache - add the following line to `secrets/db.config.json`:
+
+    "dbCacheTtl" : 1

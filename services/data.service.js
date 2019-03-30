@@ -38,7 +38,7 @@ async function exeQuery(q) {
 // set cache
 const NanoCache = require('nano-cache');
 const cache = new NanoCache({
-  ttl: 60000,                     // max aged for cache entry - ttl 60 seconds
+  ttl: config.dbCacheTtl || 60000,                     // max aged for cache entry - ttl 60 seconds
   bytes: 100 * NanoCache.SIZE.MB, // max memory use for data
 });
 
