@@ -1,15 +1,23 @@
 This project is a backend for [knesset-data-web-ui](https://github.com/WEBbeast2018/knesset-data-web-ui/)
 Backend server is available at [https://api.oknesset.org](https://api.oknesset.org)
 
-Try API:
-[https://api.oknesset.org/api/committees-by-knesset/](https://api.oknesset.org/api/committees-by-knesset/)
 
 
 ## Table of Contents
+- [Try API](#try-api)
 - [Getting Started](#getting-started)
 - [Routes](#routes)
 - [Data Cache](#data-cache)
 
+## Try API
+### Committees
+* [https://api.oknesset.org/api/committees-by-knesset/](https://api.oknesset.org/api/committees-by-knesset/)
+* [https://api.oknesset.org/api/committees-by-knesset/20](https://api.oknesset.org/api/committees-by-knesset/20)
+* [https://api.oknesset.org/api/committees-by-knesset/20/922](https://api.oknesset.org/api/committees-by-knesset/922)
+
+### Legislation
+* [https://api.oknesset.org/api/legislation-by-knesset/](https://api.oknesset.org/api/legislation-by-knesset/)
+* [https://api.oknesset.org/api/legislation-by-knesset/20](https://api.oknesset.org/api/legislation-by-knesset/20)
 
 ### Getting Started
 ```
