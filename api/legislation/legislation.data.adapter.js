@@ -19,29 +19,29 @@ ORDER BY   "GroupTypeID"
 module.exports = {
   // get committees summary for all knessets
   // https://app.redash.io/hasadna/queries/165441/source#284091
-  all: (route, callback, _, page = 0, where = "true") => {
+  all: (route, callback, params, options) => {
     const query = legislationSelectQuery + `
       FROM bills_kns_bill s
-      WHERE ${where}
+      WHERE ${options.where}
       ORDER BY "BillID" desc
       LIMIT 20
-      OFFSET ` + (page*20) +`;
+      OFFSET (${options.page}*20);
       `;
     getDataAndCallback(query, route, callback)
   },
   // get committees for specific knesset
   // https://app.redash.io/hasadna/queries/165441/source#284091
-  byKnessetNum: (route, callback, knessetNum, page = '0', where = "true") => {
+  byKnessetNum: (route, callback, params, options) => {
     const query = legislationSelectQuery + `
     FROM bills_kns_bill s
-    where "KnessetNum" = ${knessetNum} AND ${where}
+    where "KnessetNum" = ${params.knessetNum} AND ${options.where}
     ORDER BY "BillID" DESC
     LIMIT 20
-    OFFSET ` + (page*20) +`;
+    OFFSET (${options.page}*20);
     `;
     getDataAndCallback(query, route, callback)
   },
-  countByKnessetNum: (route, callback, _1, _2) => {
+  countByKnessetNum: (route, callback, params, options) => {
     const query = `
     SELECT "KnessetNum", n."Name", count(*) as num_bills
     FROM bills_kns_bill b

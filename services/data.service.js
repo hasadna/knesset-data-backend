@@ -42,30 +42,6 @@ const cache = new NanoCache({
   bytes: 100 * NanoCache.SIZE.MB, // max memory use for data
 });
 
-module.exports.requestToWhereClause = function(query, allowedNumFields, allowedStrFields) {
-  var demands = [];
-  for(let field in allowedNumFields) {
-    field = allowedNumFields[field];
-    if(typeof query[field] !== 'undefined') {
-      demands.push('"' + field + "\"=" + Number(query[field]));
-    }
-    if(typeof query[field + "Start"] !== 'undefined') {
-      demands.push('"' + field + "\">=" + Number(query[field + "Start"]));
-    }
-    if(typeof query[field + "End"] !== 'undefined') {
-      demands.push('"' + field + "\"<=" + Number(query[field + "End"]));
-    }
-  }
-  for(let field in allowedStrFields) {
-    field = allowedStrFields[field];
-    if(typeof query[field] !== 'undefined' &&
-        query[field].search(/[\'\"\;\`\%*\\/:$]/) < 0) { // disable special characters in query; avoid SQL injection
-      demands.push('"' + field + "\" LIKE \'%" + query[field] + "%'");
-    }
-  }
-  return demands.join(" AND ");
-}
-
 async function getData(query, path) {
   cache.clearExpired();	// deletes all expired key with their values to free up memory
 
