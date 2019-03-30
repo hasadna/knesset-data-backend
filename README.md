@@ -1,8 +1,8 @@
 This project is a backend for [knesset-data-web-ui](https://github.com/WEBbeast2018/knesset-data-web-ui/)
-Backend server is available at [https://oknesset-backend.herokuapp.com](https://oknesset-backend.herokuapp.com)
+Backend server is available at [https://api.oknesset.org](https://api.oknesset.org)
 
 Try API:
-[https://oknesset-backend.herokuapp.com/api/committees-by-knesset/](https://oknesset-backend.herokuapp.com/api/committees-by-knesset/)
+[https://api.oknesset.org/api/committees-by-knesset/](https://api.oknesset.org/api/committees-by-knesset/)
 
 
 ## Table of Contents
