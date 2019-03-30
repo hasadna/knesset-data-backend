@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const glob = require( 'glob' );
+const path = require( 'path' );
 // set logger namespace: debugBase:currentFile
 const debug = require('./services/log.service').debugBuilder(module.filename);
 
@@ -8,9 +10,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api', require('./api/members/members.route'));
-app.use('/api', require('./api/committees/committees.route'));
-app.use('/api', require('./api/news/news.route')); // TODO: implement route for latest items
+glob.sync( './api/**/*.route.js' ).forEach( function( file ) {
+  app.use('/api', require( path.resolve( file ) ));
+});
 
 // error handling
 // app.use((err, req, res) => {
@@ -18,7 +20,7 @@ app.use('/api', require('./api/news/news.route')); // TODO: implement route for 
 // 		res.send('ERROR');
 // 	}
 // });
-const PORT = process.env.PORT || 4000;	// process.env.PORT is used by heroku
+const PORT = process.env.PORT || 4000;	//process.env.PORT is used by heroku
 app.listen(PORT,
     () => debug(`data server listening on port ${PORT}. try: [URL:PORT]/api/committees-by-knesset/`)
 );
