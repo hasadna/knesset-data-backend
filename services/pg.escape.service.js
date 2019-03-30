@@ -3,7 +3,7 @@ const debug = require('./log.service').debugBuilder(module.filename);
 const escape = require("pg-escape");
 
 module.exports.requestToWhereClause = function(query, allowedNumFields, allowedStrFields) {
-  var demands = [];
+  const demands = [];
   for(let field in allowedNumFields) {
     field = allowedNumFields[field];
     if(typeof query[field] !== 'undefined') {

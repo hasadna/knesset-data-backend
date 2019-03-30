@@ -68,3 +68,38 @@ Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#r
 To avoid caching or set specific TTL for cache - add the following line to `secrets/db.config.json`:
 
     "dbCacheTtl" : 1
+
+
+### Running using Docker
+
+Build
+
+```
+docker build -t knesset-data-backend .
+```
+
+Create DB credentials file
+
+```
+{
+  "user": "",
+  "database": "",
+  "password": "",
+  "host": "",
+  "port": 1234
+}
+```
+
+Run (replace DB_CREDENTIALS_FILE with path to the file you created)
+
+```
+docker run -it -v DB_CREDENTIALS_FILE:/home/node/secrets/db.config.json \
+           -p 4000:4000 knesset-data-backend
+```
+
+Backend should be available at http://localhost:4000/api/committees-by-knesset
+
+
+## Continuous Deployment
+
+Merges to master are automatically deployed to: https://api.oknesset.org
