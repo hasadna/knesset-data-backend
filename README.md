@@ -1,5 +1,6 @@
 This project is a backend for [knesset-data-web-ui](https://github.com/WEBbeast2018/knesset-data-web-ui/)
-Backend server is available at [https://api.oknesset.org](https://api.oknesset.org)
+
+API server is available at [https://api.oknesset.org](https://api.oknesset.org)
 
 
 
