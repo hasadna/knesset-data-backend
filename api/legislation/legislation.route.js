@@ -1,14 +1,16 @@
 const router = require('express').Router();
 const collection = require('./legislation.data.adapter');
 const debug = require('debug')('legislation route');
+const whereParser = require('../../services/data.service').requestToWhereClause;
 
 const requestCollection = (req, res, fn) => {
-    const knessetNum = Number(req.params['knessetNum']);
-    const page = Number(req.query['page'] || 1) - 1;
-    // on dev - log
+  const knessetNum = Number(req.params['knessetNum']);
+  const page = Number(req.query['page'] || 1) - 1;
+  const where = whereParser(req.query, ["PrivateNumber", "SubTypeID", "BillID", "StatusID"], ["Name", "SubTypeDesc"]) || "true";
+  // on dev - log
   debug(`:${req.route.path}`);
   // call collection function with route and callback
-  fn(req.route.path, (d) => res.json(d), knessetNum, page);
+  fn(req.route.path, (d) => res.json(d), knessetNum, page, where);
 };
 
 // statistics of all legislation per knesset
