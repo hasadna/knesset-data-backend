@@ -20,14 +20,14 @@ API server is available at [https://api.oknesset.org](https://api.oknesset.org)
 * [https://api.oknesset.org/api/legislation-by-knesset/](https://api.oknesset.org/api/legislation-by-knesset/)
 * [https://api.oknesset.org/api/legislation-by-knesset/20](https://api.oknesset.org/api/legislation-by-knesset/20)
 
-### Getting Started
+## Getting Started
 ```
 git clone
 npm install
 ```
 Then `npm start` for standard/production  mode OR `npm run dev` for development
 
-### Routes
+## Routes
 On topic route, data service will be called to fetch the appropriate date. see file: `committees.route.js`
 
 * `/committees-by-knesset` - statistics of all committees per knesset
@@ -71,7 +71,7 @@ examples:
     /legislation?Name=ציבורי&page=2
     /legislation-by-knesset/19?SubTypeDesc=פרטית&PrivateNumberStart=50&PrivateNumberEnd=60
 
-### Data Cache
+## Data Cache
 
 Routes will be cached using [nano-cache](https://github.com/akhoury/nano-cache#readme) for specific period of time. see `data.service.js`.
 To avoid caching or set specific TTL for cache - add the following line to `secrets/db.config.json`:
@@ -79,7 +79,7 @@ To avoid caching or set specific TTL for cache - add the following line to `secr
     "dbCacheTtl" : 1
 
 
-### Running using Docker
+## Running using Docker
 
 Build
 
